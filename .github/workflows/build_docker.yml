@@ -34,5 +34,5 @@ jobs:
           context: smallapp
           file: smallapp/Dockerfile-run
           push: true
-          tags: ${{ version }}
+          tags: $version
    
