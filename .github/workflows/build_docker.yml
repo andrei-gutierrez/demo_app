@@ -13,16 +13,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3.3.0
       - name: Build npm
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
+      
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: |
-          cd smallapp
-          npm ci
-          npm run build --if-present
-          npm test
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+      
       - name: Docker login
         uses: docker/login-action@v2.1.0
         with:
