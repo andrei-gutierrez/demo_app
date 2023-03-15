@@ -42,5 +42,5 @@ jobs:
           context: smallapp
           file: smallapp/Dockerfile-run
           push: true
-          tags: nodeserver:${{ env.version }}
+          tags: audreiev/smallapp:${{ env.version }}
    
