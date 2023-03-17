@@ -36,7 +36,7 @@ jobs:
           npm install @cloudnative/health-connect
           npm install elastic-apm-node --save
           # npm install node-gyp
-          npm install appmetrics-prometheus
+          # npm install appmetrics-prometheus
           npm ci
           npm run build --if-present
           npm test 
