@@ -2,7 +2,11 @@ name: Build Docker
 env:
   version: 1.0.2
 on: 
-  push
+  push:
+    branches:
+      - main
+      - 'releases/**'
+
 jobs:
   
   build:
