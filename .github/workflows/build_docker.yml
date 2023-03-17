@@ -17,12 +17,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3.3.0
+      - name: Setup Python
+        uses: actions/setup-python@v4.5.0
+        with:
+          python-version: '3.10'
       - name: Build npm
         uses: actions/checkout@v3
       
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
-        with:
+        with: 
           node-version: ${{ matrix.node-version }}
 
       - name: Run setup
@@ -31,6 +35,8 @@ jobs:
           npm install
           npm install @cloudnative/health-connect
           npm install elastic-apm-node --save
+          # npm install node-gyp
+          npm install appmetrics-prometheus
           npm ci
           npm run build --if-present
           npm test 
