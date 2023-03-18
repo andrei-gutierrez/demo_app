@@ -14,7 +14,7 @@ const apm = require('elastic-apm-node').start({
   serverUrl: 'http://10.0.34.211:8200',
 });
 
-var apm = require('elastic-apm-node').start();
+apm = require('elastic-apm-node').start();
 
 var createError = require('http-errors');
 var express = require('express');
