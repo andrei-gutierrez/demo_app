@@ -11,7 +11,7 @@ const apm = require('elastic-apm-node').start({
   // apiKey: '',
 
   // Set custom APM Server URL (default: http://127.0.0.1:8200)
-  serverUrl: 'http://10.0.34.211:8200',
+  serverUrl: 'http://apm-server-apm-server:8200',
 });
 
 var createError = require('http-errors');
