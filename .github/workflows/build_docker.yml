@@ -1,6 +1,6 @@
 name: Build Docker
 env:
-  version: 1.2.3
+  version: 1.2.4
 on: 
   push:
     branches:
