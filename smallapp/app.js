@@ -12,7 +12,9 @@ const apm = require('elastic-apm-node').start({
 
   // Set custom APM Server URL (default: http://127.0.0.1:8200)
   serverUrl: 'https://localhost:8200',
-  verifyServerCertedit: false
+  centralConfig: false,
+  verifyServerCert: false
+    
 });
 
 var createError = require('http-errors');
