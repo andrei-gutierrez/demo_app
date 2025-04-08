@@ -5,7 +5,7 @@ metadata:
 spec:
   destination:
     name: ''
-    namespace: elastic-ns
+    namespace: elastic
     server: 'https://kubernetes.default.svc'
   source:
     path: ''
