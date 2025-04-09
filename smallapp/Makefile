@@ -4,3 +4,5 @@ install_app:
 install_apmagent:
 	npm install elastic-apm-node --save
 
+install_mongodb:
+	npm install mongodb

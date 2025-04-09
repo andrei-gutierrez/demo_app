@@ -1,6 +1,6 @@
 name: Build Docker
 env:
-  version: 1.2.12
+  version: 1.3.1
 on: 
   push:
     paths: ["smallapp/**"]
@@ -36,6 +36,7 @@ jobs:
           npm install
           npm install @cloudnative/health-connect
           npm install elastic-apm-node --save
+          npm install mongodb
           # npm install node-gyp
           # npm install appmetrics-prometheus
           npm ci
