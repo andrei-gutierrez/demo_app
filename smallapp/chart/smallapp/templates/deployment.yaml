@@ -33,13 +33,9 @@ spec:
             cpu: "{{ .Values.image.resources.requests.cpu }}"
             memory: "{{ .Values.image.resources.requests.memory }}"
         volumeMounts:
-        - name: mongodb-secret-volume
-          mountPath: /var/run/secrets/kubernetes.io/default
-          readOnly: true
+        {{ toYaml .Values.volumeConfig.volumeMounts | indent 8 }}
         volumes:
-        - name: mongodb-secret-volume
-          secret:
-            secretName: mongodb-psmdb-db-secrets
+        {{ toYaml .Values.volumeConfig.volumes | indent 6 }}
         env:
           - name: PORT
             value : "{{ .Values.service.servicePort }}"
