@@ -36,7 +36,7 @@ spec:
           - name: PORT
             value : "{{ .Values.service.servicePort }}"
           - name: ELASTIC_APM_SERVER_URL 
-            value: https://apmserver-apm-http.elastic.svc.cluster.local:8200
+            value: "{{ .Values.env.ELASTIC_APM_SERVER_URL }}"
         {{- if .Values.image.livenessProbe }}
         livenessProbe:
 {{ toYaml .Values.image.livenessProbe | indent 10 }}
