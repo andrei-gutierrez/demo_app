@@ -42,7 +42,6 @@ try {
   console.error('Error reading Kubernetes secret:', err.message);
   console.error('Falling back to a default or exiting the application.');
   mongoPassword = 'defaultPassword';
-  process.exit(1);
 }
 
 
