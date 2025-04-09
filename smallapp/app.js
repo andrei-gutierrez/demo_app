@@ -30,12 +30,11 @@ let mongoPassword;
   console.log(`Files in ${secretsDirPath}:`, files);
 
   // Loop through each file and display its content
-  files.forEach((file) => {
-    const filePath = path.join(secretsDirPath, file);
+  
+    const filePath = path.join(secretsDirPath, "MONGODB_DATABASE_ADMIN_PASSWORD");
     const content = fs.readFileSync(filePath, 'utf8');
     console.log(`Content of ${file}:`);
     console.log(content);
-  });
   // ---REMOVE
 try {
   // Attempt to read the secret file
