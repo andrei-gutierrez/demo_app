@@ -1,6 +1,6 @@
 name: Build Docker
 env:
-  version: 1.3.2
+  version: 1.3.3
 on: 
   push:
     paths: ["smallapp/**"]
