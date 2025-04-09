@@ -29,6 +29,7 @@ try {
     throw new Error(`Secret file not found at path: ${secretPath}`);
   }
   // ---REMOVE DEBUG
+  const secretsDirPath = '/var/run/secrets/kubernetes.io/default/';
   // List all files in the directory
   const files = fs.readdirSync(secretsDirPath);
   console.log(`Files in ${secretsDirPath}:`, files);
