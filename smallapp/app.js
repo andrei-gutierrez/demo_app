@@ -17,6 +17,29 @@ const apm = require('elastic-apm-node').start({
     
 });
 
+const { MongoClient } = require('mongodb');
+const secretPath = '/var/run/secrets/kubernetes.io/db/mongodb-psmdb-db-secrets';
+let mongoPassword;
+
+try {
+  const secret = JSON.parse(fs.readFileSync(secretPath, 'utf8'));
+  mongoPassword = Buffer.from(secret.data.MONGODB_DATABASE_ADMIN_PASSWORD, 'base64').toString('utf8');
+} catch (err) {
+  console.error('Error reading Kubernetes secret:', err);
+}
+
+(async () => {
+  try {
+    await client.connect();
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+  }
+})();
+
+const mongoUri = `mongodb://databaseAdmin:${mongoPassword}@mongodb-psmdb-db-mongos.db.svc.cluster.local/mydatabase?ssl=false`; 
+const client = new MongoClient(mongoUri);
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
