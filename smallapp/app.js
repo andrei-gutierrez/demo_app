@@ -18,6 +18,8 @@ const apm = require('elastic-apm-node').start({
 });
 
 const { MongoClient } = require('mongodb');
+const fs = require('fs');
+
 const secretPath = '/var/run/secrets/kubernetes.io/db/mongodb-psmdb-db-secrets';
 let mongoPassword;
 
@@ -28,16 +30,19 @@ try {
   console.error('Error reading Kubernetes secret:', err);
 }
 
-(async () => {
+healthcheck.registerReadinessCheck(async () => {
   try {
-    await client.connect();
-    console.log('Connected to MongoDB');
+    // Attempt to connect to MongoDB
+    await client.db().admin().ping();
+    console.log('MongoDB is ready');
+    return health.ReadinessState.UP();
   } catch (error) {
-    console.error('MongoDB connection error:', error);
+    console.error('MongoDB readiness check failed:', error);
+    return health.ReadinessState.DOWN();
   }
-})();
+});
 
-const mongoUri = `mongodb://databaseAdmin:${mongoPassword}@mongodb-psmdb-db-mongos.db.svc.cluster.local/mydatabase?ssl=false`; 
+const mongoUri = `mongodb://databaseAdmin:${mongoPassword}@mongodb-psmdb-db-mongos.db.svc.cluster.local/test?ssl=false`; 
 const client = new MongoClient(mongoUri);
 
 var createError = require('http-errors');
@@ -51,6 +56,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+
 
 app.use('/live',  health.LivenessEndpoint(healthcheck));
 app.use('/ready', health.ReadinessEndpoint(healthcheck));
