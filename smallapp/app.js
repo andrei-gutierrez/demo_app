@@ -41,11 +41,7 @@ try {
 } catch (err) {
   console.error('Error reading Kubernetes secret:', err.message);
   console.error('Falling back to a default or exiting the application.');
-
-  // Option 1: Fallback to a default password (not recommended for production)
-  // mongoPassword = 'defaultPassword';
-
-  // Option 2: Exit the application gracefully if the secret is critical
+  mongoPassword = 'defaultPassword';
   process.exit(1);
 }
 
