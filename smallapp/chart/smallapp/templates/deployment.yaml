@@ -32,10 +32,8 @@ spec:
           requests:
             cpu: "{{ .Values.image.resources.requests.cpu }}"
             memory: "{{ .Values.image.resources.requests.memory }}"
-          volumeMounts:
+        volumeMounts:
 {{ toYaml .Values.volumeConfig.volumeMounts | indent 10 }}
-        volumes:
-{{ toYaml .Values.volumeConfig.volumes | indent 8 }}
         env:
           - name: PORT
             value : "{{ .Values.service.servicePort }}"
@@ -49,3 +47,5 @@ spec:
         readinessProbe:
 {{ toYaml .Values.image.readinessProbe | indent 10 }}
         {{- end }}
+      volumes:
+{{ toYaml .Values.volumeConfig.volumes | indent 8 }}
