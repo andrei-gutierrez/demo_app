@@ -43,6 +43,8 @@ try {
   mongoPassword = 'defaultPassword';
 }
 
+const health = require('@cloudnative/health-connect');
+const healthcheck = new health.HealthChecker();
 healthcheck.registerReadinessCheck(async () => {
   try {
     if (!mongoPassword) {
@@ -65,8 +67,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-let health = require('@cloudnative/health-connect');
-let healthcheck = new health.HealthChecker();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
