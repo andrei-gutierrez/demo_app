@@ -31,8 +31,7 @@ let mongoPassword;
 
   // Loop through each file and display its content
   
-    const filePath = path.join(secretsDirPath, "MONGODB_DATABASE_ADMIN_PASSWORD");
-    const content = fs.readFileSync(filePath, 'utf8');
+    const content = fs.readFileSync('/var/run/secrets/kubernetes.io/default/MONGODB_DATABASE_ADMIN_PASSWORD', 'utf8');
     console.log(`Content of ${file}:`);
     console.log(content);
   // ---REMOVE
