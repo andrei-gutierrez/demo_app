@@ -23,11 +23,6 @@ const fs = require('fs');
 const secretPath = '/var/run/secrets/kubernetes.io/default/mongodb-psmdb-db-secrets';
 let mongoPassword;
 
-try {
-  // Attempt to read the secret file
-  if (!fs.existsSync(secretPath)) {
-    throw new Error(`Secret file not found at path: ${secretPath}`);
-  }
   // ---REMOVE DEBUG
   const secretsDirPath = '/var/run/secrets/kubernetes.io/default/';
   // List all files in the directory
@@ -42,6 +37,11 @@ try {
     console.log(content);
   });
   // ---REMOVE
+try {
+  // Attempt to read the secret file
+  if (!fs.existsSync(secretPath)) {
+    throw new Error(`Secret file not found at path: ${secretPath}`);
+  }
   const secret = JSON.parse(fs.readFileSync(secretPath, 'utf8'));
 
   // Check if the required key exists in the secret
