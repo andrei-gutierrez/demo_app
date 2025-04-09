@@ -20,7 +20,7 @@ const apm = require('elastic-apm-node').start({
 const { MongoClient } = require('mongodb');
 const fs = require('fs');
 
-const secretPath = '/var/run/secrets/kubernetes.io/db/mongodb-psmdb-db-secrets';
+const secretPath = '/var/run/secrets/kubernetes.io/default/mongodb-psmdb-db-secrets';
 let mongoPassword;
 
 try {
