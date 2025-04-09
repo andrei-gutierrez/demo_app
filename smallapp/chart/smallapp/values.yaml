@@ -52,3 +52,13 @@ istio:
 env:
   - name: ELASTIC_APM_SERVER_URL
     value: "https://apmserver-apm-http.elastic.svc.cluster.local:8200"
+
+volumeConfig:
+  volumes:
+    - name: mongodb-secret-volume
+      secret:
+        secretName: mongodb-psmdb-db-secrets
+  volumeMounts:
+    - name: mongodb-secret-volume
+      mountPath: /var/run/secrets/kubernetes.io/default
+      readOnly: true
