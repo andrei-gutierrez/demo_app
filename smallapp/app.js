@@ -59,8 +59,8 @@ healthcheck.registerReadinessCheck(async () => {
   }
 });
 
-const mongoUri = `mongodb://databaseAdmin:${mongoPassword}@mongodb-psmdb-db-mongos.db.svc.cluster.local/test?ssl=false`; 
-const client = new MongoClient(mongoUri);
+//const mongoUri = `mongodb://databaseAdmin:${mongoPassword}@mongodb-psmdb-db-mongos.db.svc.cluster.local/test?ssl=false`; 
+//const client = new MongoClient(mongoUri);
 
 var createError = require('http-errors');
 var express = require('express');
