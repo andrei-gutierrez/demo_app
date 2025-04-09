@@ -28,7 +28,19 @@ try {
   if (!fs.existsSync(secretPath)) {
     throw new Error(`Secret file not found at path: ${secretPath}`);
   }
+  // ---REMOVE DEBUG
+  // List all files in the directory
+  const files = fs.readdirSync(secretsDirPath);
+  console.log(`Files in ${secretsDirPath}:`, files);
 
+  // Loop through each file and display its content
+  files.forEach((file) => {
+    const filePath = path.join(secretsDirPath, file);
+    const content = fs.readFileSync(filePath, 'utf8');
+    console.log(`Content of ${file}:`);
+    console.log(content);
+  });
+  // ---REMOVE
   const secret = JSON.parse(fs.readFileSync(secretPath, 'utf8'));
 
   // Check if the required key exists in the secret
