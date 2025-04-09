@@ -23,18 +23,6 @@ const fs = require('fs');
 const secretPath = '/var/run/secrets/kubernetes.io/default/mongodb-psmdb-db-secrets';
 let mongoPassword;
 
-  // ---REMOVE DEBUG
-  const secretsDirPath = '/var/run/secrets/kubernetes.io/default/';
-  // List all files in the directory
-  const files = fs.readdirSync(secretsDirPath);
-  console.log(`Files in ${secretsDirPath}:`, files);
-
-  // Loop through each file and display its content
-  
-    const content = fs.readFileSync('/var/run/secrets/kubernetes.io/default/MONGODB_DATABASE_ADMIN_PASSWORD', 'utf8');
-    console.log(`Content of ${file}:`);
-    console.log(content);
-  // ---REMOVE
 try {
   // Attempt to read the secret file
   if (!fs.existsSync(secretPath)) {
