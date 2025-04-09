@@ -43,14 +43,6 @@ try {
   mongoPassword = 'defaultPassword';
 }
 
-
-try {
-  const secret = JSON.parse(fs.readFileSync(secretPath, 'utf8'));
-  mongoPassword = Buffer.from(secret.data.MONGODB_DATABASE_ADMIN_PASSWORD, 'base64').toString('utf8');
-} catch (err) {
-  console.error('Error reading Kubernetes secret:', err);
-}
-
 healthcheck.registerReadinessCheck(async () => {
   try {
     if (!mongoPassword) {
