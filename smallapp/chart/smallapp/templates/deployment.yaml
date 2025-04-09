@@ -34,7 +34,7 @@ spec:
             memory: "{{ .Values.image.resources.requests.memory }}"
         volumeMounts:
         - name: mongodb-secret-volume
-          mountPath: /var/run/secrets/kubernetes.io/db
+          mountPath: /var/run/secrets/kubernetes.io/default
           readOnly: true
         volumes:
         - name: mongodb-secret-volume
