@@ -24,6 +24,33 @@ const secretPath = '/var/run/secrets/kubernetes.io/default/mongodb-psmdb-db-secr
 let mongoPassword;
 
 try {
+  // Attempt to read the secret file
+  if (!fs.existsSync(secretPath)) {
+    throw new Error(`Secret file not found at path: ${secretPath}`);
+  }
+
+  const secret = JSON.parse(fs.readFileSync(secretPath, 'utf8'));
+
+  // Check if the required key exists in the secret
+  if (!secret.data || !secret.data.MONGODB_DATABASE_ADMIN_PASSWORD) {
+    throw new Error(`MONGODB_DATABASE_ADMIN_PASSWORD key not found in the secret`);
+  }
+
+  // Decode the base64 password
+  mongoPassword = Buffer.from(secret.data.MONGODB_DATABASE_ADMIN_PASSWORD, 'base64').toString('utf8');
+} catch (err) {
+  console.error('Error reading Kubernetes secret:', err.message);
+  console.error('Falling back to a default or exiting the application.');
+
+  // Option 1: Fallback to a default password (not recommended for production)
+  // mongoPassword = 'defaultPassword';
+
+  // Option 2: Exit the application gracefully if the secret is critical
+  process.exit(1);
+}
+
+
+try {
   const secret = JSON.parse(fs.readFileSync(secretPath, 'utf8'));
   mongoPassword = Buffer.from(secret.data.MONGODB_DATABASE_ADMIN_PASSWORD, 'base64').toString('utf8');
 } catch (err) {
@@ -32,7 +59,9 @@ try {
 
 healthcheck.registerReadinessCheck(async () => {
   try {
-    // Attempt to connect to MongoDB
+    if (!mongoPassword) {
+      throw new Error('MongoDB password is not available.');
+    }
     await client.db().admin().ping();
     console.log('MongoDB is ready');
     return health.ReadinessState.UP();
