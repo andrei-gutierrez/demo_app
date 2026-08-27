@@ -1,9 +1,10 @@
 # This install a small app to be monitored by elastic
 ## install npm
 `brew install npm`
+## install smallapp
 get to the folder myapp and then
 `cd smallapp`
-## install
+install the app
 `npm install`
 
 ## run from docker
