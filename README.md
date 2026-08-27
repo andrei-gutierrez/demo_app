@@ -1,4 +1,4 @@
-# This a
+# This install a small app to be monitored by elastic
 ## install npm
 `brew install npm`
 get to the folder myapp and then
