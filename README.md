@@ -1,8 +1,9 @@
-# demo_app
-```brew install npm```
-`npm install express-generator`
-`express myapp`
+# This a
+## install npm
+`brew install npm`
 get to the folder myapp and then
+`cd smallapp`
+## install
 `npm install`
 
 ## run from docker
