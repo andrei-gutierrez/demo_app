@@ -1,4 +1,4 @@
-# This install a small app to be monitored by elastic
+# This install a small app to be monitored by APM from elastic
 ## install npm
 `brew install npm`
 ## install smallapp
